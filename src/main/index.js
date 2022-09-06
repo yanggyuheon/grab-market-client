@@ -2,6 +2,7 @@
 import "./index.css";
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function MainPageComponent() {
   const [products, setProducts] = React.useState([]);
@@ -29,33 +30,39 @@ function MainPageComponent() {
     <div>
       <div id="header">
         <div id="header-area">
-          <img src="images/images/icons/logo.png" />
+          <img src="images/images/icons/logo.png" alt="{}" />
         </div>
       </div>
       <div id="body">
         <div id="banner">
-          <img src="images/images/banners/banner1.png" />
+          <img src="images/images/banners/banner1.png" alt="{}" />
         </div>
         <h1>판매되는 상품들</h1>
         <div id="product-list">
-          {/* map으로 반복하면서 product 불러오기 */}
           {products.map(function (product, index) {
             return (
               <div className="product-card">
-                <div>
-                  <img className="product-img" src={product.imageUrl} />
-                  <div className="product-contents">
-                    <span className="product-name">{product.name}</span>
-                    <span className="product-price">{product.price}원</span>
-                    <span className="product-seller">
-                      <img
-                        className="product-avatar"
-                        src="images/images/icons/avatar.png"
-                      />
-                      <span>{product.seller}</span>
-                    </span>
+                <Link className="product-link" to={`/products/${index}`}>
+                  <div>
+                    <img
+                      className="product-img"
+                      src={product.imageUrl}
+                      alt="{}"
+                    />
+                    <div className="product-contents">
+                      <span className="product-name">{product.name}</span>
+                      <span className="product-price">{product.price}원</span>
+                      <span className="product-seller">
+                        <img
+                          className="product-avatar"
+                          src="images/images/icons/avatar.png"
+                          alt="{}"
+                        />
+                        <span>{product.seller}</span>
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             );
           })}
