@@ -28,47 +28,39 @@ function MainPageComponent() {
   // return 할 때 복수의 태그 리턴안되서 div로 씌워준다
   return (
     <div>
-      <div id="header">
-        <div id="header-area">
-          <img src="images/images/icons/logo.png" alt="{}" />
-        </div>
+      <div id="banner">
+        <img src="images/images/banners/banner1.png" alt="{}" />
       </div>
-      <div id="body">
-        <div id="banner">
-          <img src="images/images/banners/banner1.png" alt="{}" />
-        </div>
-        <h1>판매되는 상품들</h1>
-        <div id="product-list">
-          {products.map(function (product, index) {
-            return (
-              <div className="product-card">
-                <Link className="product-link" to={`/products/${index}`}>
-                  <div>
-                    <img
-                      className="product-img"
-                      src={product.imageUrl}
-                      alt="{}"
-                    />
-                    <div className="product-contents">
-                      <span className="product-name">{product.name}</span>
-                      <span className="product-price">{product.price}원</span>
-                      <span className="product-seller">
-                        <img
-                          className="product-avatar"
-                          src="images/images/icons/avatar.png"
-                          alt="{}"
-                        />
-                        <span>{product.seller}</span>
-                      </span>
-                    </div>
+      <h1>판매되는 상품들</h1>
+      <div id="product-list">
+        {products.map(function (product, index) {
+          return (
+            <div className="product-card">
+              <Link className="product-link" to={`/products/${product.id}`}>
+                <div>
+                  <img
+                    className="product-img"
+                    src={product.imageUrl}
+                    alt="{}"
+                  />
+                  <div className="product-contents">
+                    <span className="product-name">{product.name}</span>
+                    <span className="product-price">{product.price}원</span>
+                    <span className="product-seller">
+                      <img
+                        className="product-avatar"
+                        src="images/images/icons/avatar.png"
+                        alt="{}"
+                      />
+                      <span>{product.seller}</span>
+                    </span>
                   </div>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+                </div>
+              </Link>
+            </div>
+          );
+        })}
       </div>
-      <div id="footer"></div>
     </div>
   );
 }
