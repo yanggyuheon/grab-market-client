@@ -1,5 +1,5 @@
 #image-box {
-  height: 300px;
+  max-height: 300px;
   display: flex;
 
   /* 가로,세로 center : 가운데 정렬 */
@@ -8,7 +8,9 @@
 }
 
 #image-box > img {
-  height: 100%;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain; /* 이미지 가로 세로 비율 유지 */
 }
 
 #profile-box {
@@ -50,5 +52,10 @@
 }
 
 #description {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+#purchase-button {
   margin-top: 16px;
 }

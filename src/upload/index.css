@@ -44,3 +44,10 @@
   border: none;
   margin-top: 16px;
 }
+
+#upload-image {
+  height: 200px;
+  width: 200px;
+  margin: 16px;
+  object-fit: contain; /* 가로 세로 비율 맞추도록 */
+}

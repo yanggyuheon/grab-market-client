@@ -1,9 +1,10 @@
 #banner {
-  height: 300px;
+  max-height: 300px;
 }
 
 #banner > img {
   width: 100%;
+  max-height: 300px;
 }
 
 #body > h1 {
@@ -24,11 +25,23 @@
   border: 1px solid rgb(230, 230, 230);
   border-radius: 12px; /* 이미지 둥글게 */
   overflow: hidden; /* 이미지가 모서리 덮는 경우 제거 */
+  position: relative;
+}
+
+.product-blur {
+  position: absolute; /* 해당 부모를 기준으로 영향주도록 */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffffaa; /* 색 뒤 2자리(aa)가 투명도 */
+  pointer-events: none; /* 포인터 클릭 가능하도록 none으로 */
 }
 
 .product-img {
   width: 100%;
   height: 210px;
+  object-fit: contain; /* 가로 세로 비율 맞춰주기 */
 }
 
 .product-contents {
@@ -50,7 +63,6 @@
 .product-seller {
   display: flex;
   align-items: center;
-  margin-top: 12px;
 }
 
 .product-avatar {
@@ -60,4 +72,20 @@
 .product-link {
   color: inherit;
   text-decoration: none;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 수평정렬된 것 수직정렬 */
+  margin-top: 12px;
+}
+
+.product-date {
+  font-size: 12px;
+  color: rgb(136, 136, 136);
+}
+
+#product-headline {
+  margin-top: 8px;
 }

@@ -17,7 +17,7 @@ body,
 }
 
 #header-area {
-  width: 1024px;
+  max-width: 1024px;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -32,8 +32,9 @@ body,
 }
 
 #body {
-  height: 100vh;
-  width: 1024px;
+  min-height: 100vh;
+  max-width: 1024px; /* 반응형으로 최대 너비로 조정 */
+  width: 100%;
   margin: 0 auto;
   padding-bottom: 24px;
 }
@@ -41,4 +42,22 @@ body,
 #footer {
   height: 200px;
   background-color: rgb(230, 230, 230);
+}
+
+/* 보통 모바일의 width 400px 보다 작아서 400 기준으로 설정 */
+/* 여러곳에서 불리면 마지막 불린게 적용, !important 작성시 적용됨(코드지저분 웬만하면 사용x) */
+@media screen and (max-width: 400px) {
+  #product-list {
+    justify-content: space-around;
+  }
+  .product-card {
+    width: 160px !important;
+  }
+  #header,
+  #body {
+    padding: 0 8px; /* 좌우만 8px padding*/
+  }
+  .ant-carousel {
+    margin: 0 -8px; /* 배너는 padding 없도록 */
+  }
 }
