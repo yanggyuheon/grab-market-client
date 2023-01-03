@@ -4,18 +4,22 @@ import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Carousel } from "antd";
 import { API_URL } from "../config/constants.js";
+import "dayjs/locale/ko";
+import PorductCard from "../components/productCard";
 
 dayjs.extend(relativeTime); // relativeTime 확장기능 사용하겠다
+dayjs.locale("ko");
 
 function MainPageComponent() {
   const [products, setProducts] = React.useState([]);
   const [banners, setBanners] = React.useState([]);
 
   // 네트워크 통신 1번만 일어나도록 useEffect 2번째 인자 빈 배열로 설정
-  React.useEffect(function () {
+  React.useEffect(() => {
     // axios - 네트워크 통신
     axios
       .get(`${API_URL}/products`)
@@ -32,6 +36,7 @@ function MainPageComponent() {
     axios // 배너 서버통신으로 가져오기, setBanners로 state변경
       .get(`${API_URL}/banners`)
       .then((result) => {
+        console.log(result);
         const banners = result.data.banners;
         setBanners(banners);
       })
@@ -59,38 +64,7 @@ function MainPageComponent() {
       <h1 id="product-headline">판매되는 상품들</h1>
       <div id="product-list">
         {products.map(function (product, index) {
-          return (
-            <div className="product-card" key={index}>
-              {product.soldout === 1 && <div className="product-blur" />}
-
-              <Link className="product-link" to={`/products/${product.id}`}>
-                <div>
-                  <img
-                    className="product-img"
-                    src={`${API_URL}/${product.imageUrl}`}
-                    alt="{}"
-                  />
-                  <div className="product-contents">
-                    <span className="product-name">{product.name}</span>
-                    <span className="product-price">{product.price}원</span>
-                    <div className="product-footer">
-                      <span className="product-seller">
-                        <img
-                          className="product-avatar"
-                          src="images/images/icons/avatar.png"
-                          alt="{}"
-                        />
-                        <span>{product.seller}</span>
-                      </span>
-                      <span className="product-date">
-                        {dayjs(product.createdAt).fromNow()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          );
+          return <PorductCard product={product} key={index} />;
         })}
       </div>
     </div>

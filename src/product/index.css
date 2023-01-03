@@ -59,3 +59,7 @@
 #purchase-button {
   margin-top: 16px;
 }
+
+#desription-box {
+  min-height: 150px;
+}

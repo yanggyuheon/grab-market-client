@@ -5,29 +5,41 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../config/constants";
 import dayjs from "dayjs";
 import { Button, message } from "antd";
+import PorductCard from "../components/productCard";
 
 function ProductPage() {
   // destructuring useParams로 가져온 값 바로 id에 넣기
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
+  const [products, setProdcuts] = useState([]);
 
   // product 정보 네트워크 통신
   const getProduct = () => {
     axios
       .get(`${API_URL}/products/${id}`)
-      .then(function (result) {
+      .then((result) => {
         setProduct(result.data.product); // product 키 값까지 접근해줘야 해서 .product로 수정
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   };
-
-  useEffect(function () {
+  const getRecommendations = () => {
+    axios
+      .get(`${API_URL}/products/${id}/recommendation`)
+      .then((result) => {
+        setProdcuts(result.data.products);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
     // 렌더링 한번만 되도록
     getProduct();
-  }, []);
+    getRecommendations();
+  }, [id]);
 
   // 서버에서 정보를 불러오는게 비동기, if문 처리해주지 않으면 product가 null
   if (product === null) {
@@ -71,7 +83,17 @@ function ProductPage() {
         >
           상품 구매하기
         </Button>
-        <pre id="description">{product.description}</pre>
+        <div id="desription-box">
+          <pre id="description">{product.description}</pre>
+        </div>
+        <div>
+          <h1>추천 상품</h1>
+          <div style={{ display: "flex", flexWarp: "wrap" }}>
+            {products.map((product, index) => {
+              return <PorductCard key={index} product={product} />;
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

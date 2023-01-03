@@ -1,4 +1,4 @@
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "./App.css";
 import MainPageComponent from "./main/index.js";
 import { Switch, Route, Link, useHistory } from "react-router-dom";
